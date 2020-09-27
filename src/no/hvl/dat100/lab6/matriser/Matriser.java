@@ -123,7 +123,7 @@ public class Matriser {
 	static class DiagonalMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(limit.x - p.x, limit.y - p.y); }	}
 	static class LeftFlippingMirror extends Mirror { 
 		Point mirror(Point p, Point limit) { 
-			if (limit.x != limit.y) throw new IllegalArgumentException("LeftFlippingMirror can only flip squared matrices!");	//Burde hatt desse i constructor, men burde heller då lage ny class, blir rotete med andre mirrors om ikkje 
+			if (limit.x != limit.y) throw new IllegalArgumentException("LeftFlippingMirror can only flip squared matrices!");	//Burde hatt desse i constructor, men burde heller då lage eiga fil til class, blir rotete med andre mirrors om ikkje 
 			return new Point(p.y, p.x);
 		}
 	}
