@@ -108,6 +108,8 @@ public class Matriser {
 			for (int x = 0; x < tblLen; ++x) {
 				Point destination = mirror.mirror(new Point(x,y), limit);
 				ret[destination.y][destination.x] = matrise[y][x];
+				//alternativt, sjå vekk i frå Mirror og Point, og bruk
+				//ret[x][y] = matrise[y][x];
 			}
 		}
 
@@ -119,8 +121,18 @@ public class Matriser {
 	static class HorizontalMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(limit.x - p.x, p.y); }	}
 	static class VerticalMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(p.x, limit.y - p.y); }	}
 	static class DiagonalMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(limit.x - p.x, limit.y - p.y); }	}
-	static class LeftFlippingMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(p.y, p.x); } }
-	static class RightFlippingMirror extends Mirror { Point mirror(Point p, Point limit) { return new Point(limit.y - p.y, limit.x - p.x); } }
+	static class LeftFlippingMirror extends Mirror { 
+		Point mirror(Point p, Point limit) { 
+			if (limit.x != limit.y) throw new IllegalArgumentException("LeftFlippingMirror can only flip squared matrices!");	//Burde hatt desse i constructor, men burde heller då lage ny class, blir rotete med andre mirrors om ikkje 
+			return new Point(p.y, p.x);
+		}
+	}
+	static class RightFlippingMirror extends Mirror { 
+		Point mirror(Point p, Point limit) { 
+			if (limit.x != limit.y) throw new IllegalArgumentException("RightFlippingMirror can only flip squared matrices!"); 
+			return new Point(limit.y - p.y, limit.x - p.x);
+		} 
+	}
 	
 	
 	//Berre for "gøy"	-> ex: new LeftFlippingMirror() = new MultiMirror(new RightFlippingMirror(), new DiagonalMirror()) 
