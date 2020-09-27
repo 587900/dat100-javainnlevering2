@@ -1,8 +1,5 @@
 package no.hvl.dat100.lab5.tabeller;
 
-import java.util.Arrays;
-import java.util.Date;
-
 public class Tabeller {
 	
 	//til testing
